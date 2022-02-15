@@ -17,7 +17,15 @@ import lombok.NoArgsConstructor;
 @JsonSerialize(include=Inclusion.NON_NULL)
 public class ExObject implements Serializable {
 	
-	private String first;
-	private String second;
+	private String name;
+	private Integer second;
+	private double third;
+	@Override
+	public String toString() {
+		return "{name=" + name + ", second=" + second + ", third=" + third + "}";
+	};
+	
+	
+	
 
 }
