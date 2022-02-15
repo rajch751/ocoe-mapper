@@ -24,44 +24,48 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class XmlSerliazableController {
 	
-	@Autowired
-	private  XmlMapper mapper;
-	
-	@GetMapping("/getFirstElement")
-	public String getFirstElement() throws Exception {
-
-		//return userService.getRSAKey(userJksPath, jkspassword, alias);
-
-		// System.out.println("token"+token);
-
-		// return new JwtResponse(token);
-		
-//ObjectMapper xmlMapper= new XmlMapper();
-		
-		Root per=mapper.readValue(StringUtils.toEncodedString(Files.readAllBytes(Paths.get("./src/main/resources/Root.xml")),StandardCharsets.UTF_8), Root.class);
-		System.out.println(per.getAnotherroot().getSecondElement().get(1).getSecondFirst());
-		return per.getFirstElement();
-		
-	}
-	
-	
-	@GetMapping("/getPersonData")
-	public String getFirstElement2() throws Exception {
-
-		//return userService.getRSAKey(userJksPath, jkspassword, alias);
-
-		// System.out.println("token"+token);
-
-		// return new JwtResponse(token);
-		
-//ObjectMapper xmlMapper= new XmlMapper();
-		
-		Person per=mapper.readValue(StringUtils.toEncodedString(Files.readAllBytes(Paths.get("./src/main/resources/student.xml")),StandardCharsets.UTF_8), Person.class);
-		//System.out.println(per.getAnotherroot().getSecondElement().get(1).getSecondFirst());
-		return per.getFirstName();
-		
-	}
-	
+	/*
+	 * @Autowired private XmlMapper mapper;
+	 * 
+	 * @GetMapping("/getFirstElement") public String getFirstElement() throws
+	 * Exception {
+	 * 
+	 * //return userService.getRSAKey(userJksPath, jkspassword, alias);
+	 * 
+	 * // System.out.println("token"+token);
+	 * 
+	 * // return new JwtResponse(token);
+	 * 
+	 * //ObjectMapper xmlMapper= new XmlMapper();
+	 * 
+	 * Root
+	 * per=mapper.readValue(StringUtils.toEncodedString(Files.readAllBytes(Paths.get
+	 * ("./src/main/resources/Root.xml")),StandardCharsets.UTF_8), Root.class);
+	 * System.out.println(per.getAnotherroot().getSecondElement().get(1).
+	 * getSecondFirst()); return per.getFirstElement();
+	 * 
+	 * }
+	 * 
+	 * 
+	 * @GetMapping("/getPersonData") public String getFirstElement2() throws
+	 * Exception {
+	 * 
+	 * //return userService.getRSAKey(userJksPath, jkspassword, alias);
+	 * 
+	 * // System.out.println("token"+token);
+	 * 
+	 * // return new JwtResponse(token);
+	 * 
+	 * //ObjectMapper xmlMapper= new XmlMapper();
+	 * 
+	 * Person
+	 * per=mapper.readValue(StringUtils.toEncodedString(Files.readAllBytes(Paths.get
+	 * ("./src/main/resources/student.xml")),StandardCharsets.UTF_8), Person.class);
+	 * //System.out.println(per.getAnotherroot().getSecondElement().get(1).
+	 * getSecondFirst()); return per.getFirstName();
+	 * 
+	 * }
+	 */	
 	
 
 }
