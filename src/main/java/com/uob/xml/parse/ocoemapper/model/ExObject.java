@@ -17,13 +17,21 @@ import lombok.NoArgsConstructor;
 @JsonSerialize(include=Inclusion.NON_NULL)
 public class ExObject implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+	
 	private String name;
 	private Integer second;
 	private double third;
+	private String fourth;
+	private String fifth;
 	@Override
 	public String toString() {
-		return "{name=" + name + ", second=" + second + ", third=" + third + "}";
-	};
+		return "ExObject [name=" + name + ", second=" + second + ", third=" + third + ", fourth=" + fourth + ", fifth="
+				+ fifth + "]";
+	}
+	
+	
+	
 	
 	
 	

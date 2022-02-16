@@ -10,7 +10,7 @@ class Test {
   public static void main(String[] args) throws Exception {
     URL url = new URL("http://localhost:8080/v1/parse/postObjectvalue");
     Map<String,Object> params = new LinkedHashMap<>();
-     ExObject exObject=new ExObject("first",1,2);
+     ExObject exObject=new ExObject("first",1,2,"r","g");
     params.put("sampleobject", exObject);
     StringBuilder postData = new StringBuilder();
     for (Map.Entry<String,Object> param : params.entrySet()) {
