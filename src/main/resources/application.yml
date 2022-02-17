@@ -1,0 +1,7 @@
+server:
+  ssl:
+    key-alias: localhost
+    key-store: classpath:localhost.jks
+    key-store-type: JKS
+    key-password: changeit
+    key-store-password: changeit
