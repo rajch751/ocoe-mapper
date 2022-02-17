@@ -45,11 +45,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ParseInputStream {
 
-	@Autowired
-	private ObjectMapper mapper;
-
-	@Autowired
-	private Gson gson;
+	
 
 
 
@@ -102,100 +98,5 @@ public class ParseInputStream {
 	  }
 	
 	
-	private static byte[] getByteArray(Object obj) throws IOException {
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		try (ObjectOutputStream os = new ObjectOutputStream(bos)) {
-			os.writeObject(obj);
-		}
-		return bos.toByteArray();
-	}
-
-	@RequestMapping(value = "/postObjectvalue", method = RequestMethod.POST, consumes = {
-			MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-	public ResponseEntity<ExObject> postoutputstreamAsObject122(@RequestParam Map<String, Object> allParams,
-			HttpServletRequest httpServletRequest) throws ClassNotFoundException, IOException {
-
-		// System.out.println(allParams+"allParams");
-		// System.out.println(allParams + "allParams");
-
-		Object a = allParams.get("sampleobject");
-
-		ExObject outputMovie = gson.fromJson(allParams.get("sampleobject").toString(), ExObject.class);
-
-		System.out.println(outputMovie);
-
-		outputMovie.setName("JAYA");
-		outputMovie.setSecond(35);
-		outputMovie.setThird(3);
-
-		// This code doesnot work
-
-		InputStream is = httpServletRequest.getInputStream();
-		byte[] bytes = StreamUtils.copyToByteArray(is);
-		// commented getting exception here line 190 -to 192
-
-		/*
-		 * ByteArrayInputStream bi = new ByteArrayInputStream(bytes); ObjectInputStream
-		 * oi = new ObjectInputStream(bi); Object obj = oi.readObject();
-		 * System.out.println("obj" + obj);
-		 */
-
-		// same code work for client and not her
-
-		Reader in = new BufferedReader(new InputStreamReader(httpServletRequest.getInputStream(), "UTF-8"));
-
-		for (int c; (c = in.read()) >= 0;)
-			System.out.print((char) c);
-
-		// ByteArrayInputStream bi1 = new
-		// ByteArrayInputStream(allParams.get("sampleobject"));
-		// System.out.println("came-------------------"+new
-		// String(allParams.get("sampleobject")));
-		// ObjectInputStream oi1 = new ObjectInputStream(bi1);
-		// Object obj1 = oi1.readObject();
-		// System.out.println("came-------------------");
-		// System.out.println("obj1111111111" + obj1);
-
-		/*
-		 * try { Reader in = new BufferedReader(new
-		 * InputStreamReader(httpServletRequest.getInputStream()));
-		 * 
-		 * //this line of code is not all working ..even if we converted to bytes and
-		 * send to the class
-		 * 
-		 * for (int c; (c = in.read()) >= 0;) System.out.print((char) c);
-		 * 
-		 * InputStream is = httpServletRequest.getInputStream(); byte[] bytes =
-		 * StreamUtils.copyToByteArray(is); ByteArrayInputStream bi = new
-		 * ByteArrayInputStream(allParams.get("sampleobject")); ObjectInputStream oi =
-		 * new ObjectInputStream(bi); Object obj = oi.readObject();
-		 * System.out.println("obj" + obj);
-		 * 
-		 * } catch (IOException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); }
-		 * 
-		 * System.out.println(new String(allParams.get("sampleobject")) +
-		 * "value================");
-		 * 
-		 * ExObject exObject; try { exObject = mapper.readValue(new
-		 * String(allParams.get("sampleobject")), ExObject.class);
-		 * System.out.println(exObject + "exObject"); } catch (JsonMappingException e) {
-		 * // TODO Auto-generated catch block e.printStackTrace(); } catch
-		 * (JsonProcessingException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); }
-		 */
-		// System.out.println("EXObject is"+exObject);
-
-		return ResponseEntity.ok(outputMovie);
-
-		// InputStream is;
-
-	}
 	
-	
-	@GetMapping("/getData")
-	public String getMessage() {
-		return "Accessed by HTTPS protocol";
-	}
-
 }

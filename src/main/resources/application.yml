@@ -5,3 +5,7 @@ server:
     key-store-type: JKS
     key-password: changeit
     key-store-password: changeit
+   
+    
+    
+    

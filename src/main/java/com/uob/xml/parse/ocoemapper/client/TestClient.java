@@ -124,25 +124,27 @@ public class TestClient implements Serializable {
 		// keyStoreType);
 		props.put("java.protocol.handler.pkgs", "com.sun.net.ssl.internal.www.protocol");
 		System.setProperties(props);
-		// Security.addProvider(props);
-//     Security.addProvider(new TestProvider("localhost")); 
+	//	Security.addProvider(props);
+//    Security.addProvider(new TestProvider("localhost")); 
 		
 		//ResourceLoader resourceLoader = new DefaultResourceLoader();
 
 
 		FileInputStream fis = new FileInputStream(
-				"src/main/resources/localhost.jks");
+				"src/main/resources/localhostupd2.jks");  // client side jks
 		String password = "changeit";
 		KeyStore ks = KeyStore.getInstance("pkcs12");
 		ks.load(fis, password.toCharArray());
-		String alia = "localhost";
+		String alia = "localhost.new";  // server side certificate
 		X509Certificate c = (X509Certificate) ks.getCertificate(alia);
+		System.out.println(c);
+		System.out.println(c.getSubjectDN());
 		String certBankCode = c.getSubjectDN().getName().substring(0).toUpperCase();
 		System.out.println(certBankCode);
 
 		//String password = "changeit";
 		FileInputStream cafis = new FileInputStream(
-				"src/main/resources/localhost.jks");
+				"src/main/resources/localhost.jks");  // server jks
 		// String password="changeit";
 		KeyStore caks = KeyStore.getInstance("jks");
 		caks.load(cafis, password.toCharArray());
