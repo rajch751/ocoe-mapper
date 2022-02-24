@@ -40,6 +40,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
+//import javax.net.ssl.Provider;
 
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
@@ -124,25 +125,27 @@ public class TestClient implements Serializable {
 		// keyStoreType);
 		props.put("java.protocol.handler.pkgs", "com.sun.net.ssl.internal.www.protocol");
 		System.setProperties(props);
-	//	Security.addProvider(props);
+	//Security.addProvider(new Provider());
+	
 //    Security.addProvider(new TestProvider("localhost")); 
 		
 		//ResourceLoader resourceLoader = new DefaultResourceLoader();
+		java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
 
+		
+		  FileInputStream fis = new FileInputStream("src/main/resources/localhostnew2.jks"); // client side jks 
+		  String password ="changeit";
+		  KeyStore ks = KeyStore.getInstance("pkcs12"); 
+		  ks.load(fis,password.toCharArray());
+		  String alia = "localhost.new2"; // server sidecertificate
+		  X509Certificate c = (X509Certificate) ks.getCertificate(alia);
+		  System.out.println(c); 
+		  System.out.println(c.getSubjectDN()); String
+		  certBankCode = c.getSubjectDN().getName().substring(0).toUpperCase();
+		  System.out.println(certBankCode);
+		 
 
-		FileInputStream fis = new FileInputStream(
-				"src/main/resources/localhostupd2.jks");  // client side jks
-		String password = "changeit";
-		KeyStore ks = KeyStore.getInstance("pkcs12");
-		ks.load(fis, password.toCharArray());
-		String alia = "localhost.new";  // server side certificate
-		X509Certificate c = (X509Certificate) ks.getCertificate(alia);
-		System.out.println(c);
-		System.out.println(c.getSubjectDN());
-		String certBankCode = c.getSubjectDN().getName().substring(0).toUpperCase();
-		System.out.println(certBankCode);
-
-		//String password = "changeit";
+	//	String password = "changeit";
 		FileInputStream cafis = new FileInputStream(
 				"src/main/resources/localhost.jks");  // server jks
 		// String password="changeit";
@@ -168,11 +171,7 @@ public class TestClient implements Serializable {
 		return sl;
 	}
 
-	private static class TestProvider extends Provider {
-		TestProvider(String name) {
-			super(name, "0.0", "Not for use in production systems!");
-		}
-	}
+	
 
 	private static byte[] getByteArray(Object obj) throws IOException {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
