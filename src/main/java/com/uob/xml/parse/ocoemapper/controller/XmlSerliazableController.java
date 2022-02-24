@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.uob.xml.parse.ocoemapper.model.EAIClass;
 import com.uob.xml.parse.ocoemapper.model.Person;
 import com.uob.xml.parse.ocoemapper.model.Root;
 
@@ -38,9 +39,12 @@ public class XmlSerliazableController {
 		
 //ObjectMapper xmlMapper= new XmlMapper();
 		
-		Root per=mapper.readValue(StringUtils.toEncodedString(Files.readAllBytes(Paths.get("./src/main/resources/Root.xml")),StandardCharsets.UTF_8), Root.class);
-		System.out.println(per.getAnotherroot().getSecondElement().get(1).getSecondFirst());
-		return per.getFirstElement();
+		EAIClass per=mapper.readValue(StringUtils.toEncodedString(Files.readAllBytes(Paths.get("./src/main/resources/fasila.xml")),StandardCharsets.UTF_8), EAIClass.class);
+		System.out.println(per.getBwh());
+		
+		String s=StringUtils.toEncodedString(Files.readAllBytes(Paths.get("./src/main/resources/fasila.xml")),StandardCharsets.UTF_8);
+		System.out.println(s);
+		return per.getSvcrs().getStatusCode();
 		
 	}
 	
